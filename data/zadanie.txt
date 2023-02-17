@@ -1,0 +1,14 @@
+Funkcie :
+
+Vytváranie knižnice
+Editovanie knižnice
+Vymazanie knižnice
+Vytváranie študentov v knižnice
+Vylúčenie študentov z knižnice
+Editovanie študentov
+Vytváranie knihy v knižnice
+Vylúčenie knihy z knižnice
+Editovanie študentov v knižnice
+Vytváranie referencie kniha-študent max 30 dní
+Vracanie knihy
+História referencií študenta
