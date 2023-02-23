@@ -1,12 +1,13 @@
-const { foo } = require('../backend/db.js');
-const { createAndQuery } = require('../backend/db.js');
-var assert = require('assert');
+const { foo } = require('../backend/db.js')
+const { tryIfDatabaseConnectionIsWorking } = require('../backend/db.js')
+const { destroy } = require('../backend/db.js')
+
 describe('db module', function () {
-    it('call function foo', function () {
-      foo();
-    });
-    it('call createAndQuery',async function () {
-        this.timeout(10000);
-        await createAndQuery();
-      });
-});
+    after(function () {
+        destroy()
+        // runs once after the last test in this block
+    })
+    it('call tryIfDatabaseConnectionIsWorking', async function () {
+        await tryIfDatabaseConnectionIsWorking()
+    })
+})
