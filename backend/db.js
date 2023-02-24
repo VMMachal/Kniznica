@@ -17,6 +17,7 @@ function init() {
 function destroy() {
     if (pool) {
         pool.end()
+        pool = null;
     }
 }
 
@@ -37,15 +38,13 @@ async function tryIfDatabaseConnectionIsWorking() {
     try {
         conn = await getConnection()
         const rows = await conn.query('SELECT 1 as val')
-        console.log('@@@@@ first log')
-        console.dir(rows)
         const res = await conn.query('select * from kniznica', [])
-        console.log('@@@@@ second log')
-        console.dir(res)
     } finally {
         closeConnection(conn)
     }
 }
 
-exports.tryIfDatabaseConnectionIsWorking = tryIfDatabaseConnectionIsWorking
-exports.destroy = destroy
+exports.tryIfDatabaseConnectionIsWorking = tryIfDatabaseConnectionIsWorking;
+exports.destroy = destroy;
+exports.getConnection = getConnection;
+exports.closeConnection = closeConnection;

@@ -1,25 +1,24 @@
-function eight() {
-    let nieco = 8
-    return nieco
-}
+function demonstrationOfClosure_1() {
 
-function addAndMultiply(a, b) {
-    if (!b) {
-        let c = 10
-        b = c
-        console.log(c)
+    function multiplyNumberByN (n) {
+  
+      return function (num) {
+        console.log(`multiplying by ${n}`);
+        return num * n;
+      }
+  
+  
     }
-
-    let result = a + b
-    result = 2 * result
-    return `${result}` + eight() + (eight() - 2)
-}
-
-function convertStringToNumber(str) {
-    return Number(str)
-}
-let a
-a = addAndMultiply(2)
-a = convertStringToNumber(a)
-
-console.log(a)
+  
+    function addNumbers(m, n) {
+      return m + n;
+    }
+  
+    let f2 = multiplyNumberByN(2);
+    let f5 = multiplyNumberByN(5);
+  
+    let val = addNumbers(f2(4), f5(3));
+  
+    console.log(`val = ${val}`);
+  }
+  demonstrationOfClosure_1();
