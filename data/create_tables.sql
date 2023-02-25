@@ -29,7 +29,8 @@ create table if not exists kniznica_student
     student_id varchar(50) not null,
     primary key (id),
     foreign key (kniznica_id) references kniznica (id),
-    foreign key (student_id) references student (id)
+    foreign key (student_id) references student (id),
+    unique (kniznica_id, student_id)
 );
 
 create table if not exists kniznica_kniha 

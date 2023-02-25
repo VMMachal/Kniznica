@@ -55,7 +55,37 @@ async function kniznicaGetAll() {
     }
 }
 
+async function kniznicaAddStudent(kniznicaId, studentId) {
+    let conn
+    try {
+        conn = await getConnection()
+        let id = uuidv4()
+        await conn.query(
+            'insert into kniznica_student(id, kniznica_id, student_id) values(?, ?, ?)',
+            [id, kniznicaId, studentId]
+        )
+    } finally {
+        closeConnection(conn)
+    }
+}
+
+async function kniznicaGetAllStudents(kniznicaId) {
+    let conn
+    try {
+        conn = await getConnection()
+        let rows = await conn.query(
+            'select s.*  from  kniznica_student  ks join student s  on s.id =  ks.student_id where ks.kniznica_id = ?;',
+            [kniznicaId]
+        )
+        return rows
+    } finally {
+        closeConnection(conn)
+    }
+}
+
 exports.kniznicaCreate = kniznicaCreate
 exports.kniznicaGet = kniznicaGet
 exports.kniznicaUpdate = kniznicaUpdate
 exports.kniznicaGetAll = kniznicaGetAll
+exports.kniznicaAddStudent = kniznicaAddStudent
+exports.kniznicaGetAllStudents = kniznicaGetAllStudents

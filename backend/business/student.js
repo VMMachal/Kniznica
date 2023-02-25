@@ -55,7 +55,7 @@ async function studentGetAll() {
     }
 }
 
-exports.studentCreate = studentCreate;
-exports.studentUpdate = studentUpdate;
-exports.studentGet = studentGet;
-exports.studentGetAll = studentGetAll;
+exports.studentCreate = studentCreate
+exports.studentUpdate = studentUpdate
+exports.studentGet = studentGet
+exports.studentGetAll = studentGetAll
