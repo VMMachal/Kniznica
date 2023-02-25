@@ -1,1 +1,1 @@
-drop database kniznica;
+drop database if exists kniznicadb;

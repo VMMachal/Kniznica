@@ -2,38 +2,38 @@ const { getConnection } = require('../db')
 const { v4: uuidv4 } = require('uuid')
 const { closeConnection } = require('../db')
 
-async function kniznicaCreate(meno, popis) {
+async function studentCreate(meno, priezvisko) {
     let conn
     try {
         conn = await getConnection()
         let id = uuidv4()
         await conn.query(
-            'insert into kniznica(id, meno, popis) values(?, ?, ?)',
-            [id, meno, popis]
+            'insert into student(id, meno, priezvisko) values(?, ?, ?)',
+            [id, meno, priezvisko]
         )
     } finally {
         closeConnection(conn)
     }
 }
 
-async function kniznicaUpdate(id, meno, popis) {
+async function studentUpdate(id, meno, priezvisko) {
     let conn
     try {
         conn = await getConnection()
         let result = await conn.query(
-            'update kniznica  set meno = ?,  popis =  ?  where id = ?',
-            [meno, popis, id]
+            'update student  set meno = ?,  priezvisko =  ?  where id = ?',
+            [meno, priezvisko, id]
         )
     } finally {
         closeConnection(conn)
     }
 }
 
-async function kniznicaGet(id) {
+async function studentGet(id) {
     let conn
     try {
         conn = await getConnection()
-        let rows = await conn.query('select * from kniznica where id = ?', [id])
+        let rows = await conn.query('select * from student where id = ?', [id])
         if (rows.length > 0) {
             return rows[0]
         } else {
@@ -44,18 +44,18 @@ async function kniznicaGet(id) {
     }
 }
 
-async function kniznicaGetAll() {
+async function studentGetAll() {
     let conn
     try {
         conn = await getConnection()
-        let rows = await conn.query('select * from kniznica', [])
+        let rows = await conn.query('select * from student', [])
         return rows
     } finally {
         closeConnection(conn)
     }
 }
 
-exports.kniznicaCreate = kniznicaCreate
-exports.kniznicaGet = kniznicaGet
-exports.kniznicaUpdate = kniznicaUpdate
-exports.kniznicaGetAll = kniznicaGetAll
+exports.studentCreate = studentCreate;
+exports.studentUpdate = studentUpdate;
+exports.studentGet = studentGet;
+exports.studentGetAll = studentGetAll;

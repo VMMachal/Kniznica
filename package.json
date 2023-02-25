@@ -4,7 +4,8 @@
     "description": "kniznica",
     "main": "index.js",
     "scripts": {
-        "test": "mocha"
+        "test": "mocha",
+        "prettier": "prettier --write ."
     },
     "repository": {
         "type": "git",

@@ -1,6 +1,6 @@
-const { foo } = require('../backend/db.js')
-const { tryIfDatabaseConnectionIsWorking } = require('../backend/db.js')
-const { destroy } = require('../backend/db.js')
+const { foo } = require('../backend/db')
+const { tryIfDatabaseConnectionIsWorking } = require('../backend/db')
+const { destroy } = require('../backend/db')
 
 describe('db module', function () {
     after(function () {

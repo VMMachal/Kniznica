@@ -1,1 +1,1 @@
-create database kniznica;
+create database kniznicadb;

@@ -1,1 +1,1 @@
-drop user 'kniznica'@'%';
+drop user if exists 'karol'@'%';

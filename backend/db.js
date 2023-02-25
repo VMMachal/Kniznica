@@ -17,7 +17,7 @@ function init() {
 function destroy() {
     if (pool) {
         pool.end()
-        pool = null;
+        pool = null
     }
 }
 
@@ -44,7 +44,7 @@ async function tryIfDatabaseConnectionIsWorking() {
     }
 }
 
-exports.tryIfDatabaseConnectionIsWorking = tryIfDatabaseConnectionIsWorking;
-exports.destroy = destroy;
-exports.getConnection = getConnection;
-exports.closeConnection = closeConnection;
+exports.tryIfDatabaseConnectionIsWorking = tryIfDatabaseConnectionIsWorking
+exports.destroy = destroy
+exports.getConnection = getConnection
+exports.closeConnection = closeConnection
