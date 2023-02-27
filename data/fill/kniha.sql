@@ -6,3 +6,4 @@ insert into kniha (id,titul,popis) values ('0e2d9034-781f-43a2-aca7-45c5985f8d2e
 insert into kniha (id,titul,popis) values ('f4bf02ff-e971-4079-ac0b-d4169752525f','kniha 6','love story');
 insert into kniha (id,titul,popis) values ('9cb07317-9a4f-4fc3-816e-dd866d6adfef','kniha 7','detska kniha');
 insert into kniha (id,titul,popis) values ('cce89900-2682-4ce4-98a8-6fcc287c9e4f','kniha 8','fantasy');
+insert into kniha (id,titul,popis) values ('2f10a042-6d4f-4148-a58e-174829da8ee8','kniha 9','manual');

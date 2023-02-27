@@ -40,7 +40,8 @@ create table if not exists kniznica_kniha
     kniha_id varchar(50) not null,
     primary key (id),
     foreign key (kniznica_id) references kniznica (id),
-    foreign key (kniha_id) references kniha (id)
+    foreign key (kniha_id) references kniha (id),
+    unique (kniznica_id, kniha_id)
 );
 
 create table if not exists vypozicka

@@ -1,8 +1,8 @@
-const { studentCreate } = require('../backend/business/student')
-const { studentGet } = require('../backend/business/student')
-const { studentUpdate } = require('../backend/business/student')
-const { studentGetAll } = require('../backend/business/student')
-const { destroy } = require('../backend/db')
+const { studentCreate } = require('../src/business/student')
+const { studentGet } = require('../src/business/student')
+const { studentUpdate } = require('../src/business/student')
+const { studentGetAll } = require('../src/business/student')
+const { destroy } = require('../src/db')
 
 describe('db module', function () {
     after(function () {
