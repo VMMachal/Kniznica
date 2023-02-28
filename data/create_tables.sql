@@ -54,8 +54,9 @@ create table if not exists vypozicka
    datum_vratenia datetime,
    primary key (id),
    foreign key (kniznica_id) references kniznica (id),
+   foreign key (student_id) references student (id),
    foreign key (kniha_id) references kniha (id),
-   foreign key (student_id) references student (id)
+   unique (kniznica_id, student_id, kniha_id)
 );
 
 create table if not exists user

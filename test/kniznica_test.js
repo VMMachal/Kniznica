@@ -10,7 +10,7 @@ const { kniznicaAddKniha } = require('../src/business/kniznica')
 const { kniznicaRemoveKniha } = require('../src/business/kniznica')
 const { kniznicaGetAllKnihy } = require('../src/business/kniznica')
 
-describe('db module', function () {
+describe('kniznica', function () {
     after(function () {
         destroy()
     })

@@ -4,7 +4,7 @@ const { knihaUpdate } = require('../src/business/kniha')
 const { knihaGetAll } = require('../src/business/kniha')
 const { destroy } = require('../src/db')
 
-describe('db module', function () {
+describe('kniha', function () {
     after(function () {
         destroy()
     })

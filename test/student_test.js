@@ -4,7 +4,7 @@ const { studentUpdate } = require('../src/business/student')
 const { studentGetAll } = require('../src/business/student')
 const { destroy } = require('../src/db')
 
-describe('db module', function () {
+describe('student', function () {
     after(function () {
         destroy()
     })
