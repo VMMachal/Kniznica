@@ -3,8 +3,8 @@ const {
     vypozickaVratenieKnihy,
     vypozickaGet,
     vypozickaGetHistoryOfVypozickaForStudent,
-} = require('../src/business/vypozicka')
-const { destroy } = require('../src/db')
+} = require('../../src/business/vypozicka')
+const { destroy } = require('../../src/db')
 
 describe('vypozicka', function () {
     after(function () {

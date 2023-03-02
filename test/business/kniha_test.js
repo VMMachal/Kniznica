@@ -1,8 +1,8 @@
-const { knihaCreate } = require('../src/business/kniha')
-const { knihaGet } = require('../src/business/kniha')
-const { knihaUpdate } = require('../src/business/kniha')
-const { knihaGetAll } = require('../src/business/kniha')
-const { destroy } = require('../src/db')
+const { knihaCreate } = require('../../src/business/kniha')
+const { knihaGet } = require('../../src/business/kniha')
+const { knihaUpdate } = require('../../src/business/kniha')
+const { knihaGetAll } = require('../../src/business/kniha')
+const { destroy } = require('../../src/db')
 
 describe('kniha', function () {
     after(function () {

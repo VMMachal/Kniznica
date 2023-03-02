@@ -1,8 +1,8 @@
-const { studentCreate } = require('../src/business/student')
-const { studentGet } = require('../src/business/student')
-const { studentUpdate } = require('../src/business/student')
-const { studentGetAll } = require('../src/business/student')
-const { destroy } = require('../src/db')
+const { studentCreate } = require('../../src/business/student')
+const { studentGet } = require('../../src/business/student')
+const { studentUpdate } = require('../../src/business/student')
+const { studentGetAll } = require('../../src/business/student')
+const { destroy } = require('../../src/db')
 
 describe('student', function () {
     after(function () {

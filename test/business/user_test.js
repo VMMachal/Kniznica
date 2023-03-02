@@ -1,5 +1,5 @@
-const { userVerifyPassword } = require('../src/business/user')
-const { destroy } = require('../src/db')
+const { userVerifyPassword } = require('../../src/business/user')
+const { destroy } = require('../../src/db')
 
 describe('user', function () {
     after(function () {
