@@ -20,6 +20,9 @@ let anchor = document.getElementById("testGet");
         sendGetRequest("/api").then((data)=>{
             console.log("@@@@@@@@@@@ cp 5000")
             console.dir(data);
+            let elem = document.getElementById("testGet_result");
+            console.dir(elem);
+            elem.innerText = JSON.stringify(data);
         })
 
         console.log("click2");
