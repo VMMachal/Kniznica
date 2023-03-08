@@ -1,26 +1,25 @@
 function getKey() {
-    return "attr2";
-  }
+    return 'attr2'
+}
 
-let obj1;
+let obj1
 
 obj1 = {
-  attr1:
-   5,
-  attr2: "foo",
-};
+    attr1: 5,
+    attr2: 'foo',
+}
 
 //_____________________________
 
-let obj2;
+let obj2
 
 obj2 = {
-  "attr1": 5,
-  "attr2": "foo2",
-};
+    attr1: 5,
+    attr2: 'foo2',
+}
 
-let arr = [getKey,obj2,5,6];
-let obj3 = {};
+let arr = [getKey, obj2, 5, 6]
+let obj3 = {}
 
 arr.forEach((e, i) => {
     if (i === 0) {
@@ -28,14 +27,10 @@ arr.forEach((e, i) => {
         console.log(obj2[e()])
         obj3.a1 = obj1[e()]
         obj3.a2 = obj2[e()]
-    }
-    else {
+    } else {
         console.log(e)
     }
-    
-});
+})
 
-console.log("___________");
-console.log (obj3);
-
-
+console.log('___________')
+console.log(obj3)

@@ -97,4 +97,5 @@ async function vypozickaGetHistoryOfVypozickaForStudent(kniznicaId, studentId) {
 exports.vypozickaCreate = vypozickaCreate
 exports.vypozickaVratenieKnihy = vypozickaVratenieKnihy
 exports.vypozickaGet = vypozickaGet
-exports.vypozickaGetHistoryOfVypozickaForStudent = vypozickaGetHistoryOfVypozickaForStudent
+exports.vypozickaGetHistoryOfVypozickaForStudent =
+    vypozickaGetHistoryOfVypozickaForStudent
