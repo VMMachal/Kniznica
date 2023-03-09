@@ -1,15 +1,24 @@
-function sendGetRequest(url) {
-    let promise = fetch(url, {
+
+function sendGetRequest(url, params) {
+    let urlWithParams;
+    if (params) {
+        let queryParams = new URLSearchParams(params);
+        urlWithParams = `${url}?${queryParams.toString()}`;
+    } else {
+        urlWithParams = `${url}`;
+    }
+
+    let promise = fetch(urlWithParams, {
         method: 'GET',
     })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('Success:', data)
-            return data
-        })
-        .catch((error) => {
-            console.error('Error:', error)
-        })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log('Success:', data)
+        return data
+    })
+    .catch((error) => {
+        console.error('Error:', error)
+    })
     return promise
 }
 
@@ -36,7 +45,7 @@ let anchor = document.getElementById('testGet')
 anchor.addEventListener('click', (event) => {
     event.preventDefault()
 
-    sendGetRequest('/api').then((data) => {
+    sendGetRequest('/api/kniznicaGet', {id: "7991c1be-cb43-43bc-a389-210bf4aef8e0"}).then((data) => {
         console.log('@@@@@@@@@@@ cp 5000')
         console.dir(data)
         let elem = document.getElementById('testGet_result')
@@ -61,5 +70,10 @@ button.addEventListener('click', (event) => {
     console.log(password)
     let obj = JSON.parse(txt)
     console.dir(obj)
-    sendPostRequest('/api/kniznicaCreate', obj)
+    let promise = sendPostRequest('/api/kniznicaCreate', obj)
+    promise.then((result) => {
+        let elem = document.getElementById('testPost_result');
+        elem.innerText = JSON.stringify(result);
+    })
+
 })
