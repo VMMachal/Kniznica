@@ -11,6 +11,7 @@ async function studentCreate(meno, priezvisko) {
             'insert into student(id, meno, priezvisko) values(?, ?, ?)',
             [id, meno, priezvisko]
         )
+        return id
     } finally {
         closeConnection(conn)
     }

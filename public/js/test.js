@@ -45,8 +45,7 @@ let anchor = document.getElementById('testGet')
 anchor.addEventListener('click', (event) => {
     event.preventDefault()
 
-    sendGetRequest('/api/kniznicaGet', {id: "7991c1be-cb43-43bc-a389-210bf4aef8e0"}).then((data) => {
-        console.log('@@@@@@@@@@@ cp 5000')
+    sendGetRequest('/api/vypozickaGet', {kniznicaId:"7991c1be-cb43-43bc-a389-210bf4aef8e0", studentId:"bde492e7-1902-4e34-a304-6e740d6729b2", knihaId:"6f304175-2ea4-4405-ae52-2c5736d1614d"}).then((data) => {
         console.dir(data)
         let elem = document.getElementById('testGet_result')
         console.dir(elem)
@@ -70,7 +69,7 @@ button.addEventListener('click', (event) => {
     console.log(password)
     let obj = JSON.parse(txt)
     console.dir(obj)
-    let promise = sendPostRequest('/api/kniznicaCreate', obj)
+    let promise = sendPostRequest('/api/knihaUpdate', obj)
     promise.then((result) => {
         let elem = document.getElementById('testPost_result');
         elem.innerText = JSON.stringify(result);
