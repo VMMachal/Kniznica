@@ -25,6 +25,11 @@ async function kniznicaUpdate(id, meno, popis) {
             'update kniznica  set meno = ?,  popis =  ?  where id = ?',
             [meno, popis, id]
         )
+        result = await kniznicaGet(id);
+        return {
+            meno: result.meno,
+            popis: result.popis
+        }
     } finally {
         closeConnection(conn)
     }
@@ -61,10 +66,19 @@ async function kniznicaAddStudent(kniznicaId, studentId) {
     try {
         conn = await getConnection()
         let id = uuidv4()
-        await conn.query(
+        let result = await conn.query(
             'insert into kniznica_student(id, kniznica_id, student_id) values(?, ?, ?)',
             [id, kniznicaId, studentId]
         )
+        result = await conn.query(
+            'select * from kniznica_student where id = ?',
+            [id]
+        )
+        return {
+            kniznicaId: result[0].kniznica_id,
+            studentId: result[0].student_id
+        }
+
     } finally {
         closeConnection(conn)
     }

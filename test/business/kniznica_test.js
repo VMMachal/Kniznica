@@ -25,8 +25,10 @@ describe('kniznica', function () {
     })
     it('call kniznicaUpdate', async function () {
         let kniznica = await kniznicaGet('7991c1be-cb43-43bc-a389-210bf4aef8e0')
-        await kniznicaUpdate(kniznica.id, kniznica.meno, 'blablabla')
-        kniznica = await kniznicaGet(kniznica.id)
+        let result = await kniznicaUpdate(kniznica.id, kniznica.meno, 'blablabla')
+        if (result.meno !== kniznica.meno) {
+            throw new Error ('assertion failed');
+        }
     })
     it('call kniznicaGetAll', async function () {
         await kniznicaGetAll()
@@ -40,21 +42,14 @@ describe('kniznica', function () {
         }
     })
     it('call kniznicaAddStudent', async function () {
-        await kniznicaAddStudent(
+        let result = await kniznicaAddStudent(
             '7991c1be-cb43-43bc-a389-210bf4aef8e0',
             'a1f3ba63-1664-4ac3-a30c-115fe1cf5537'
         )
-        let studenti = await kniznicaGetAllStudents(
-            '7991c1be-cb43-43bc-a389-210bf4aef8e0'
-        )
-        const student = studenti.find(function (student) {
-            if (student.id === 'a1f3ba63-1664-4ac3-a30c-115fe1cf5537') {
-                return true
-            } else {
-                return false
-            }
-        })
-        if (!student) {
+        if (result.kniznicaId !== '7991c1be-cb43-43bc-a389-210bf4aef8e0') {
+            throw new Error('Assertion failed')
+        }
+        if (result.studentId !== 'a1f3ba63-1664-4ac3-a30c-115fe1cf5537') {
             throw new Error('Assertion failed')
         }
     })

@@ -19,8 +19,10 @@ describe('kniha', function () {
     })
     it('call knihaUpdate', async function () {
         let kniha = await knihaGet('6f304175-2ea4-4405-ae52-2c5736d1614d')
-        await knihaUpdate(kniha.id, kniha.titul, 'blablabla')
-        kniha = await knihaGet(kniha.id)
+        let result = await knihaUpdate(kniha.id, kniha.titul, 'blablabla')
+        if (result.titul !== kniha.titul) {
+            throw new Error ('assertion failed');
+        }
     })
     it('call knihaGetAll', async function () {
         await knihaGetAll()

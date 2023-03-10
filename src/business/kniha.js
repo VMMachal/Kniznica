@@ -25,7 +25,11 @@ async function knihaUpdate(id, titul, popis) {
             'update kniha  set titul = ?,  popis =  ?  where id = ?',
             [titul, popis, id]
         )
-        return id
+        result = await knihaGet(id);
+        return {
+            titul: result.titul,
+            popis: result.popis
+        }
     } finally {
         closeConnection(conn)
     }
