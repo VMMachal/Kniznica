@@ -25,6 +25,12 @@ async function studentUpdate(id, meno, priezvisko) {
             'update student  set meno = ?,  priezvisko =  ?  where id = ?',
             [meno, priezvisko, id]
         )
+        result = await conn.query(
+            'select * from student where id = ?',
+            [id]
+        )
+        return {Meno: result[0].meno, 
+                Priezvisko: result[0].priezvisko}
     } finally {
         closeConnection(conn)
     }

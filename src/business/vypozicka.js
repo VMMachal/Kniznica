@@ -53,6 +53,12 @@ async function vypozickaVratenieKnihy(kniznicaId, studentId, knihaId) {
             'update vypozicka set datum_vratenia = ? where id = ?',
             [currentDate, vypozickaId]
         )
+        let result = await conn.query(
+            'select * from vypozicka where id = ?',
+            [vypozickaId]
+        )
+        return {vratenie: result[0].datum_vratenia}
+
     } finally {
         closeConnection(conn)
     }

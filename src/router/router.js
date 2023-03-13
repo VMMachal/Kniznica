@@ -4,17 +4,24 @@ const { kniznicaCreate } = require('../business/kniznica')
 const { kniznicaGet } = require('../business/kniznica')
 const { kniznicaGetAll } = require('../business/kniznica')
 const { kniznicaGetAllStudents } = require('../business/kniznica')
+const { kniznicaGetAllKnihy } = require('../business/kniznica')
 const { kniznicaUpdate } = require('../business/kniznica')
 const { kniznicaAddStudent } = require('../business/kniznica')
 const { kniznicaRemoveStudent } = require('../business/kniznica')
+const { kniznicaAddKniha } = require('../business/kniznica')
+const { kniznicaRemoveKniha } = require('../business/kniznica')
 const { knihaCreate } = require('../business/kniha')
 const { knihaGet } = require('../business/kniha')
 const { knihaGetAll } = require('../business/kniha')
 const { knihaUpdate } = require('../business/kniha')
 const { studentGet } = require('../business/student')
 const { studentCreate } = require('../business/student')
+const { studentUpdate } = require('../business/student')
+const { studentGetAll } = require('../business/student')
 const { vypozickaGet } = require('../business/vypozicka')
 const { vypozickaCreate } = require('../business/vypozicka')
+const { vypozickaVratenieKnihy } = require('../business/vypozicka')
+const { vypozickaGetHistoryOfVypozickaForStudent } = require('../business/vypozicka')
 
 const FILE = 'router/router.js'
 
@@ -111,6 +118,28 @@ router.get('/knihaGetAll', async function (req, res) {
     }
 })
 
+router.get('/studentGetAll', async function (req, res) {
+    const FUNC = 'get(/studentGetAll)'
+    try {
+        console.dir(req.query)
+        let id = req.query.id
+        if (!id) {
+            res.status(400)
+            result.json({});
+            res.end()
+            return
+        }
+        let result = await studentGetAll(id)
+        res.status(200)
+        res.json(result);
+        res.end()
+    } catch (err) {
+        console.error(`${FILE}:${FUNC}: error`, err)
+        res.status(500)
+        res.end()
+    }
+})
+
 router.get('/kniznicaGetAllStudents', async function (req, res) {
     const FUNC = 'get(/kniznicaGetAllStudents)'
     try {
@@ -123,6 +152,28 @@ router.get('/kniznicaGetAllStudents', async function (req, res) {
             return
         }
         let result = await kniznicaGetAllStudents(kniznicaId)
+        res.status(200)
+        res.json(result);
+        res.end()
+    } catch (err) {
+        console.error(`${FILE}:${FUNC}: error`, err)
+        res.status(500)
+        res.end()
+    }
+})
+
+router.get('/kniznicaGetAllKnihy', async function (req, res) {
+    const FUNC = 'get(/kniznicaGetAllKnihy)'
+    try {
+        console.dir(req.query)
+        let kniznicaId = req.query.kniznicaId
+        if (!kniznicaId) {
+            res.status(400)
+            result.json({});
+            res.end()
+            return
+        }
+        let result = await kniznicaGetAllKnihy(kniznicaId)
         res.status(200)
         res.json(result);
         res.end()
@@ -171,6 +222,29 @@ router.get('/vypozickaGet', async function (req, res) {
         let studentId = req.query.studentId
         let knihaId = req.query.knihaId
         let result = await vypozickaGet(kniznicaId,studentId,knihaId)
+        res.status(200)
+        res.json({result});
+        res.end()
+    } catch (err) {
+        console.error(`${FILE}:${FUNC}: error`, err)
+        res.status(500)
+        res.end()
+    }
+})
+
+router.get('/vypozickaGetHistoryOfVypozickaForStudent', async function (req, res) {
+    const FUNC = 'get(/vypozickaGetHistoryOfVypozickaForStudent)'
+    try {
+        console.dir(req.query)
+        let kniznicaId = req.query.kniznicaId
+        if (!kniznicaId) {
+            res.status(400)
+            result.json({});
+            res.end()
+            return
+        }
+        let studentId = req.query.studentId
+        let result = await vypozickaGetHistoryOfVypozickaForStudent(kniznicaId,studentId)
         res.status(200)
         res.json({result});
         res.end()
@@ -279,6 +353,52 @@ router.post('/kniznicaRemoveStudent', async function (req, res) {
     }
 })
 
+router.post('/kniznicaAddKniha', async function (req, res) {
+    const FUNC = 'post(/kniznicaAddKniha)'
+    try {
+        console.dir(req.body)
+        let kniznicaId = req.body.kniznicaId
+        if (!kniznicaId) {
+            res.status(400)
+            res.json({});
+            res.end()
+            return
+        }
+        let knihaId = req.body.knihaId
+        let result = await kniznicaAddKniha(kniznicaId, knihaId)
+        res.status(200)
+        res.json(result);
+        res.end()
+    } catch (err) {
+        console.error(`${FILE}:${FUNC}: error`, err)
+        res.status(500)
+        res.end()
+    }
+})
+
+router.post('/kniznicaRemoveKniha', async function (req, res) {
+    const FUNC = 'post(/kniznicaRemoveKniha)'
+    try {
+        console.dir(req.body)
+        let kniznicaId = req.body.kniznicaId
+        if (!kniznicaId) {
+            res.status(400)
+            res.json({});
+            res.end()
+            return
+        }
+        let knihaId = req.body.knihaId
+        let result = await kniznicaRemoveKniha(kniznicaId, knihaId)
+        res.status(200)
+        res.json(result);
+        res.end()
+    } catch (err) {
+        console.error(`${FILE}:${FUNC}: error`, err)
+        res.status(500)
+        res.end()
+    }
+})
+
 router.post('/knihaCreate', async function (req, res) {
     const FUNC = 'post(/knihaCreate)'
     try {
@@ -350,6 +470,31 @@ router.post('/studentCreate', async function (req, res) {
     }
 })
 
+router.post('/studentUpdate', async function (req, res) {
+    const FUNC = 'post(/studentUpdate)'
+    try {
+        console.dir(req.body)
+        let id = req.body.id
+        if (!id) {
+            res.status(400)
+            console.log("HERE")
+            res.json({});
+            res.end()
+            return
+        }
+        let meno = req.body.meno
+        let priezvisko = req.body.priezvisko
+        let result = await studentUpdate(id, meno, priezvisko)
+        res.status(200)
+        res.json(result);
+        res.end()
+    } catch (err) {
+        console.error(`${FILE}:${FUNC}: error`, err)
+        res.status(500)
+        res.end()
+    }
+})
+
 router.post('/vypozickaCreate', async function (req, res) {
     const FUNC = 'post(/vypozickaCreate)'
     try {
@@ -367,6 +512,30 @@ router.post('/vypozickaCreate', async function (req, res) {
         let id = await vypozickaCreate(kniznicaId, studentId, knihaId)
         res.status(200)
         res.json({id});
+        res.end()
+    } catch (err) {
+        console.error(`${FILE}:${FUNC}: error`, err)
+        res.status(500)
+        res.end()
+    }
+})
+
+router.post('/vypozickaVratenieKnihy', async function (req, res) {
+    const FUNC = 'post(/vypozickaVratenieKnihy)'
+    try {
+        console.dir(req.body)
+        let kniznicaId = req.body.kniznicaId
+        if (!kniznicaId) {
+            res.status(400)
+            res.json({});
+            res.end()
+            return
+        }
+        let studentId = req.body.studentId
+        let knihaId = req.body.knihaId
+        let result = await vypozickaVratenieKnihy(kniznicaId, studentId, knihaId)
+        res.status(200)
+        res.json(result);
         res.end()
     } catch (err) {
         console.error(`${FILE}:${FUNC}: error`, err)

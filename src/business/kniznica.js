@@ -77,7 +77,7 @@ async function kniznicaAddStudent(kniznicaId, studentId) {
         return {
             kniznicaId: result[0].kniznica_id,
             studentId: result[0].student_id
-        }
+        } 
 
     } finally {
         closeConnection(conn)
@@ -93,6 +93,8 @@ async function kniznicaRemoveStudent(kniznicaId, studentId) {
             'delete from kniznica_student where kniznica_id = ? and student_id =  ?',
             [kniznicaId, studentId]
         )
+        return 'Student was removed!'
+        
     } finally {
         closeConnection(conn)
     }
@@ -117,10 +119,18 @@ async function kniznicaAddKniha(kniznicaId, knihaId) {
     try {
         conn = await getConnection()
         let id = uuidv4()
-        await conn.query(
+        let result = await conn.query(
             'insert into kniznica_kniha(id, kniznica_id, kniha_id) values(?, ?, ?)',
             [id, kniznicaId, knihaId]
         )
+        result = await conn.query(
+            'select * from kniha where id = ?',
+            [knihaId]
+        )
+        return {
+            titul: result[0].titul,
+            popis: result[0].popis
+        }
     } finally {
         closeConnection(conn)
     }
@@ -135,6 +145,7 @@ async function kniznicaRemoveKniha(kniznicaId, knihaId) {
             'delete from kniznica_kniha where kniznica_id = ? and kniha_id =  ?',
             [kniznicaId, knihaId]
         )
+        return 'Kniha was removed!'
     } finally {
         closeConnection(conn)
     }
