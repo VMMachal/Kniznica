@@ -1,7 +1,10 @@
 const { getConnection } = require('../db')
 const { closeConnection } = require('../db')
 
-async function userVerifyPassword(userName, password) {
+const FILE = 'router/router.js'
+
+async function login(userName, password) {
+    const FUNC = 'login()';
     let conn
     try {
         conn = await getConnection()
@@ -10,6 +13,7 @@ async function userVerifyPassword(userName, password) {
             userName,
         ])
         if (rows.length < 1) {
+            console.warn(`${FILE}:${FUNC}: no such user`);
             throw new Error('no such user')
         }
         let user = rows[0]
@@ -18,10 +22,13 @@ async function userVerifyPassword(userName, password) {
             delete user.heslo
             return user
         }
-        return rows
+        else {
+            console.warn(`${FILE}:${FUNC}: unauthenticated`);
+            throw new Error ('unauthenticated');
+        }
     } finally {
         closeConnection(conn)
     }
 }
 
-exports.userVerifyPassword = userVerifyPassword
+exports.login = login

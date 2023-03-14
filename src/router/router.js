@@ -22,6 +22,7 @@ const { vypozickaGet } = require('../business/vypozicka')
 const { vypozickaCreate } = require('../business/vypozicka')
 const { vypozickaVratenieKnihy } = require('../business/vypozicka')
 const { vypozickaGetHistoryOfVypozickaForStudent } = require('../business/vypozicka')
+const { login } = require('../business/user')
 
 const FILE = 'router/router.js'
 
@@ -543,6 +544,37 @@ router.post('/vypozickaVratenieKnihy', async function (req, res) {
         res.end()
     }
 })
+
+router.post('/login', async function (req, res) {
+    const FUNC = 'post(/login)'
+    try {
+        console.dir(req.body)
+        let userName = req.body.userName
+        if (!userName) {
+            res.status(400)
+            res.json({});
+            res.end()
+            return
+        }
+        let password = req.body.password
+        if (!password) {
+            res.status(400)
+            res.json({});
+            res.end()
+            return
+        }
+        let result = await login(userName, password)
+        req.session.user = result;
+        res.status(200)
+        res.json(result);
+        res.end()
+    } catch (err) {
+        console.error(`${FILE}:${FUNC}: error`, err)
+        res.status(401)
+        res.end()
+    }
+})
+
 
 
 exports.router = router

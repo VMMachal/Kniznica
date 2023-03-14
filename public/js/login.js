@@ -21,22 +21,28 @@ let button = document.getElementById('loginSubmitButtonId')
 
 button.addEventListener('click', (event) => {
     event.preventDefault()
+
     console.log('click on login button')
     console.dir(event)
+
     let formElem = document.getElementById('login-Form')
     console.dir(formElem);
+
     let userNameElem = formElem.elements["userName"];
     let userPasswordElem = formElem.elements["userPassword"];
     console.log(userNameElem.value);
     console.log(userPasswordElem.value);
+    let userName = userNameElem.value;
+    let password = userPasswordElem.value;
 
-    /*console.log(password)
-    let obj = JSON.parse(txt)
-    console.dir(obj)
-    let promise = sendPostRequest('/api/vypozickaVratenieKnihy', obj)
+    let obj = {
+        userName: userName,
+        password: password
+    }
+    let promise = sendPostRequest('/api/login', obj)
     promise.then((result) => {
         let elem = document.getElementById('testPost_result');
         elem.innerText = JSON.stringify(result);
-    })*/
+    })
 
 })
