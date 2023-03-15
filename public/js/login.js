@@ -1,4 +1,17 @@
+function hidePageErrorMessageBox() {
+    let boxElem = document.getElementById('page-error-message-box');
+    boxElem.style.display = 'none';
+}
+
+function displayPageErrorMessageBox(message) {
+    let boxElem = document.getElementById('page-error-message-box');
+    boxElem.style.display = 'flex';
+    let messageElem = document.getElementById('page-error-message-box-message');
+    messageElem.innerText = message;
+}
+
 function sendPostRequest(url, body) {
+    hidePageErrorMessageBox();
     let promise = fetch(url, {
         method: 'POST',
         headers: {
@@ -6,13 +19,21 @@ function sendPostRequest(url, body) {
         },
         body: JSON.stringify(body),
     })
-        .then((response) => response.json())
+        .then((response) => {
+            console.log(response.status);
+            if (response.status !== 200) {
+                displayPageErrorMessageBox("prihlasenie zlyhalo");
+                throw new Error ("prihlasenie zlyhalo");
+            } 
+            return response.json()
+        })
         .then((data) => {
             console.log('Success:', data)
             return data
         })
         .catch((error) => {
             console.error('Error:', error)
+            return null;
         })
     return promise
 }
@@ -41,8 +62,11 @@ button.addEventListener('click', (event) => {
     }
     let promise = sendPostRequest('/api/login', obj)
     promise.then((result) => {
-        let elem = document.getElementById('testPost_result');
-        elem.innerText = JSON.stringify(result);
+        if (result === null) {
+            return
+        }
+        console.log("result of login");
+        console.dir(result);
     })
 
 })

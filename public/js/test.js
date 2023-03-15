@@ -76,3 +76,8 @@ button.addEventListener('click', (event) => {
     })
 
 })
+
+function hidePageErrorMessageBox() {
+    let boxElem = document.getElementById('page-error-message-box');
+    boxElem.style.display = 'none';
+}
