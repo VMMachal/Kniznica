@@ -61,7 +61,7 @@
     border-style: solid;
     border-color: red;
     border-width: 2px;
-    display: flex;
+    display: none;
     flex-direction: row;
     padding: 10px;
     justify-content: space-between;

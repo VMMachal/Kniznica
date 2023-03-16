@@ -65,8 +65,7 @@ button.addEventListener('click', (event) => {
         if (result === null) {
             return
         }
-        console.log("result of login");
-        console.dir(result);
+        window.location.href = '/'
     })
 
 })

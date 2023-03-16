@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 let session = require('express-session');
 let MySQLStore = require('express-mysql-session')(session);
 
+const FILE = 'router/router.js'
 const app = express()
 
 const port = 3000
@@ -26,7 +27,8 @@ app.use(session({
 	saveUninitialized: true
 }));
 
-function trackClicks (req, res, next) {
+function makeTrackClicksMiddleware(maximumCounter){
+  function trackClicks (req, res, next) {
     if (!req.session) {
       next();
       return;
@@ -34,11 +36,40 @@ function trackClicks (req, res, next) {
     if (!req.session.countOfRequests) {
       req.session.countOfRequests = 0;
     }
-    req.session.countOfRequests = req.session.countOfRequests + 1;
+    if (req.session.countOfRequests > maximumCounter) {
+      req.session.countOfRequests = 0;
+    }
+    console.dir(req.path)
+    req.session.countOfRequests++
     console.log(`count of requests: ${req.session.countOfRequests}`)
     next();
   }
-app.use(trackClicks);
+  return trackClicks
+}
+
+app.use(makeTrackClicksMiddleware(100))
+
+function redirectToLogin(req, res, next) {
+  const FUNC = 'redirectToLogin()';
+  if (req.path === '/login.html' || req.path === '/css/main.css' || req.path === '/js/login.js' || req.path === '/api/login') {
+    next();
+    return;
+  }
+  if (!req.session) {
+    console.error(`${FILE}:${FUNC}: no session middleware`)
+    res.status(500)
+    res.end()
+    return;
+  }
+  if (!req.session.user) {
+    // redirect to login.html
+    res.redirect('/login.html')
+    res.end()
+    return;
+  }
+  next();
+}
+app.use(redirectToLogin);
 
 app.use(express.static('public'))
 app.use(express.json())
