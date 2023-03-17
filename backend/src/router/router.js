@@ -575,6 +575,31 @@ router.post('/login', async function (req, res) {
     }
 })
 
+router.get('/user', async function (req, res) {
+    const FUNC = 'get(/user)'
+    try {
+        if (!req.session) {
+            res.status(401)
+            res.json({});
+            res.end()
+            return
+        }
+        if (!req.session.user) {
+            res.status(401)
+            res.json({});
+            res.end()
+            return
+        }
+        res.status(200);
+        res.json(req.session.user);
+        res.end();
+    } catch (err) {
+        console.error(`${FILE}:${FUNC}: error`, err)
+        res.status(500)
+        res.end()
+    }
+})
+
 
 
 exports.router = router

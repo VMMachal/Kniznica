@@ -49,27 +49,27 @@ function makeTrackClicksMiddleware(maximumCounter){
 
 app.use(makeTrackClicksMiddleware(100))
 
-function redirectToLogin(req, res, next) {
-  const FUNC = 'redirectToLogin()';
-  if (req.path === '/login.html' || req.path === '/css/main.css' || req.path === '/js/login.js' || req.path === '/api/login') {
+function checkIfAuth(req, res, next) {
+  const FUNC = 'checkIfAuth()';
+  if (req.path.startswith('/api')) {
+
+    if (!req.session) {
+      res.status(401);
+      res.end();
+      return
+    }
+
+    if (!req.session.user) {
+      res.status(401);
+      res.end();
+      return;
+    }
     next();
-    return;
+  } else {
+    next();
   }
-  if (!req.session) {
-    console.error(`${FILE}:${FUNC}: no session middleware`)
-    res.status(500)
-    res.end()
-    return;
-  }
-  if (!req.session.user) {
-    // redirect to login.html
-    res.redirect('/login.html')
-    res.end()
-    return;
-  }
-  next();
 }
-app.use(redirectToLogin);
+app.use(checkIfAuth);
 
 app.use(express.static('public'))
 app.use(express.json())

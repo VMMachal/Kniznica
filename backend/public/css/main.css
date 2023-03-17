@@ -61,11 +61,22 @@
     border-style: solid;
     border-color: red;
     border-width: 2px;
-    display: none;
+    display: flex;
     flex-direction: row;
     padding: 10px;
     justify-content: space-between;
 }
+
+.ErrorMessage-error-container {
+    border-style: solid;
+    border-color: red;
+    border-width: 2px;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-between;
+}
+
 .container-for-login .login-Form .exit-button {
     display: flex;
     flex-direction: column;
@@ -73,6 +84,15 @@
     width: 24px;
     color: red;
 }
+
+.ErrorMessage-exit-button {
+    display: flex;
+    flex-direction: column;
+    height: 24px;
+    width: 24px;
+    color: red;
+}
+
 .container-for-login .login-Form .exit-button :hover {
     cursor: pointer;
 }
