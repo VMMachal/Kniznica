@@ -51,7 +51,7 @@ app.use(makeTrackClicksMiddleware(100))
 
 function checkIfAuth(req, res, next) {
   const FUNC = 'checkIfAuth()';
-  if (req.path.startswith('/api')) {
+  if (req.path.startsWith('/api')) {
 
     if (!req.session) {
       res.status(401);
