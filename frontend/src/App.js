@@ -11,10 +11,9 @@ async function readUser() {
     return user
 }
 
-async function login(userName, password) {
-    let result = await sendPostRequest("/api/login", {userName: userName, password: password})
-    console.dir(result);
-    return result
+async function login(userName, password, setUser) {
+    let user = await sendPostRequest("/api/login", {userName: userName, password: password})
+    setUser(user);
 }
 
 function App() {
@@ -35,15 +34,28 @@ function App() {
     setFormPassword(e.target.value);
   }
 
-  function handleSubmitButton() {
+  function handleSubmitButton(e) {
+    e.preventDefault();
     console.log(formUserName);
     console.log(formPassword);
-    login(formUserName, formPassword);
+    login(formUserName, formPassword, setUser);
   }
 
-  return (
+  if (user){
+    return (
+        <div>
+            <h1> This is main page </h1>
+             <div>
+                {JSON.stringify(user)}
+             </div>
+        </div>
+    )
+  } else {
+    return (
+        
     <div className="container-for-login">
             <ErrorMessage></ErrorMessage>
+            {JSON.stringify(user)}
             <form id="login-Form" className="login-Form">
                 <div className="header-container">
                     <h1>Prihlasenie</h1>
@@ -66,6 +78,9 @@ function App() {
             </form>
         </div>
   );
+  }
+
+  
 }
 
 export default App;
