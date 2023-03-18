@@ -36,7 +36,6 @@ export async function sendPostRequest(url, body) {
         });
 
         let data = await response.json();
-        console.log('Success:', data)
         if (response.ok) {
             let data = await response.json();
             console.log('Success:', data)

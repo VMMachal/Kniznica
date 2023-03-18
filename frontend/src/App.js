@@ -3,10 +3,18 @@ import "./css/main.css";
 import ErrorMessage from "./ErrorMessage";
 import {sendGetRequest} from "./utils/fetch";
 import { useEffect, useState } from 'react';
+import {sendPostRequest} from "./utils/fetch";
+
 
 async function readUser() {
     let user = await sendGetRequest("/api/user");
     return user
+}
+
+async function login(userName, password) {
+    let result = await sendPostRequest("/api/login", {userName: userName, password: password})
+    console.dir(result);
+    return result
 }
 
 function App() {
@@ -15,9 +23,9 @@ function App() {
   let [ formUserName, setFormUserName ] = useState(null);
   let [ formPassword, setFormPassword ] = useState(null);
 
-  /*useEffect(() => {
+  useEffect(() => {
     readUser();
-  }, []);*/
+  }, []);
 
   function handleChangeFormUserName(e) {
     setFormUserName(e.target.value);
@@ -30,6 +38,7 @@ function App() {
   function handleSubmitButton() {
     console.log(formUserName);
     console.log(formPassword);
+    login(formUserName, formPassword);
   }
 
   return (

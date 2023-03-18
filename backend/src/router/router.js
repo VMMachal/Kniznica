@@ -548,7 +548,7 @@ router.post('/vypozickaVratenieKnihy', async function (req, res) {
 router.post('/login', async function (req, res) {
     const FUNC = 'post(/login)'
     try {
-        console.dir(req.body)
+        console.log("@@@@@@@@@@@@@ cp 4900")
         let userName = req.body.userName
         if (!userName) {
             res.status(400)
@@ -564,6 +564,8 @@ router.post('/login', async function (req, res) {
             return
         }
         let result = await login(userName, password)
+        console.log("@@@@@@@@@@ cp 5000")
+        console.dir(result);
         req.session.user = result;
         res.status(200)
         res.json(result);
