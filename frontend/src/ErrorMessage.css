@@ -1,0 +1,22 @@
+.ErrorMessage-error-container {
+    border-style: solid;
+    border-color: red;
+    border-width: 2px;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.ErrorMessage-exit-button {
+    display: flex;
+    flex-direction: column;
+    height: 24px;
+    width: 24px;
+    color: red;
+}
+
+.ErrorMessage-exit-button :hover {
+    cursor: pointer;
+}
+
