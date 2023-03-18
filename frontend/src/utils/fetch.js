@@ -34,8 +34,6 @@ export async function sendPostRequest(url, body) {
             },
             body: JSON.stringify(body),
         });
-
-        let data = await response.json();
         if (response.ok) {
             let data = await response.json();
             console.log('Success:', data)

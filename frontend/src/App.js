@@ -27,10 +27,12 @@ function App() {
   }, []);
 
   function handleChangeFormUserName(e) {
+    e.preventDefault();
     setFormUserName(e.target.value);
   }
 
   function handleChangeFormPassword(e) {
+    e.preventDefault();
     setFormPassword(e.target.value);
   }
 
