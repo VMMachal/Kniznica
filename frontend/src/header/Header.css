@@ -1,0 +1,7 @@
+.Header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    border-bottom: 1mm solid rgba(211, 211, 211, 1);
+    padding-bottom: 10px;
+}

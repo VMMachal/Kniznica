@@ -1,0 +1,84 @@
+.Login-container-for-get {
+    background-color: rgb(230, 190, 190);
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 400px;
+    border-radius: 25px;
+}
+.Login-container-for-post {
+    background-color: rgb(230, 190, 190);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 25px;
+    width: 400px;
+    border-radius: 25px;
+}
+.Login-container-for-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    border-radius: 25px;
+
+}
+
+.Login-container-for-login .Login-login-Form {
+    background-color: rgb(175, 162, 162);
+    width: 500px;
+    padding: 25px;
+    border-radius: 25px;
+
+    
+}
+
+.Login-container-for-login .Login-login-Form .Login-button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.Login-container-for-login .Login-login-Form .Login-header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.Login-container-for-login .Login-login-Form .Login-lable-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+
+.ErrorMessage-error-container {
+    border-style: solid;
+    border-color: red;
+    border-width: 2px;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.ErrorMessage-exit-button {
+    display: flex;
+    flex-direction: column;
+    height: 24px;
+    width: 24px;
+    color: red;
+}
+
+
+.ErrorMessage-exit-button :hover {
+    cursor: pointer;
+}
+.Login-container {
+}

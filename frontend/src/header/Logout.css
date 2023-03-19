@@ -1,0 +1,15 @@
+.Logout-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+.Logout-vitaj-container{
+    margin-right: 20px;
+}
+
+.Logout-link{
+    margin-right: 20px;
+}
