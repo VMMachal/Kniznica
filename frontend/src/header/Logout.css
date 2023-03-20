@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    flex-grow: 1;
     justify-content: flex-end;
 }
 
@@ -11,5 +10,10 @@
 }
 
 .Logout-link{
-    margin-right: 20px;
+
+}
+
+.Logout-link-container {
+    display: flex;
+    justify-content: right;
 }

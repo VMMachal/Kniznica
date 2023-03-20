@@ -57,14 +57,7 @@ router.get('/kniznicaGetAll', async function (req, res) {
     const FUNC = 'get(/kniznicaGetAll)'
     try {
         console.dir(req.query)
-        let id = req.query.id
-        if (!id) {
-            res.status(400)
-            result.json({});
-            res.end()
-            return
-        }
-        let result = await kniznicaGetAll(id)
+        let result = await kniznicaGetAll()
         res.status(200)
         res.json(result);
         res.end()
@@ -548,7 +541,6 @@ router.post('/vypozickaVratenieKnihy', async function (req, res) {
 router.post('/login', async function (req, res) {
     const FUNC = 'post(/login)'
     try {
-        console.log("@@@@@@@@@@@@@ cp 4900")
         let userName = req.body.userName
         if (!userName) {
             res.status(400)
@@ -564,11 +556,26 @@ router.post('/login', async function (req, res) {
             return
         }
         let result = await login(userName, password)
-        console.log("@@@@@@@@@@ cp 5000")
         console.dir(result);
         req.session.user = result;
         res.status(200)
         res.json(result);
+        res.end()
+    } catch (err) {
+        console.error(`${FILE}:${FUNC}: error`, err)
+        res.status(401)
+        res.end()
+    }
+})
+
+router.post('/logout', async function (req, res) {
+    const FUNC = 'post(/logout)'
+    try {
+        if (req.session) {
+            delete req.session.user;
+        }
+        res.status(200)
+        res.json({});
         res.end()
     } catch (err) {
         console.error(`${FILE}:${FUNC}: error`, err)
