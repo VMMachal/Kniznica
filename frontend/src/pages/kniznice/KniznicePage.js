@@ -10,16 +10,33 @@ async function readKniznice(setKniznice) {
     setKniznice(kniznice);
 }
 
-function KniznicaLine(kniznica) {
+function KniznicaLine(kniznica, changeRoute) {
+    function handleClickOtvor(){
+        changeRoute("kniznica/KniznicaPage", null)
+    }
+    function handleClickUprav(){
+        changeRoute("kniznice/EditKniznicaPage", null)
+    }
+    function handleClickVymaz(){
+        changeRoute("kniznice/DeleteKniznicaPage", null)
+    }
+
     return (
         <tr>
             <td>{kniznica.meno}</td>
             <td>{kniznica.popis}</td>
+            <td>
+                <div className="action-link-container">
+                    <a href="#" onClick={handleClickOtvor}>otvor</a>
+                    <a href="#" onClick={handleClickUprav}>uprav</a>
+                    <a href="#" onClick={handleClickVymaz}>vymaz</a>
+                </div>
+            </td>
         </tr>
     )
 }
 
-function KniznicePage() {
+function KniznicePage({routeParams, changeRoute}) {
 
     let [ kniznice, setKniznice ] = useState([]);
 
@@ -27,24 +44,31 @@ function KniznicePage() {
         readKniznice(setKniznice);
     }, []);
 
+function handleClickButtonVytvorKniznice() {
+    changeRoute("kniznice/VytvorKniznicaPage", null)
+}
+
   return (
     
     <div className="KniznicePage-container">
-        <table>
-            <thead>
-                 <tr>
-                    <th>meno</th>
-                    <th>popis</th>
-                 </tr>
-            </thead>
-            <tbody>
-                {
-                  kniznice.map(function (k) {
-                        return KniznicaLine(k)
-                    })
-                }
-            </tbody>
+        <table className="KniznicePage-main-table">
+            <caption><b>Zoznam kniznic</b></caption>
+                <thead align="left">
+                    <tr>
+                        <th>meno</th>
+                        <th>popis</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        kniznice.map(function (k) {
+                            return KniznicaLine(k, changeRoute)
+                        })
+                    }
+                </tbody>
         </table>
+        <button className="KniznicePage-button-vytvor-kniznicu" onClick={handleClickButtonVytvorKniznice}>vytvor kniznicu</button>
     </div>
   );
 }

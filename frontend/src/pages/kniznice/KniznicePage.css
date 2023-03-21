@@ -2,3 +2,14 @@
     display: flex;
     flex-direction: column;
 }
+
+.KniznicePage-container .KniznicePage-main-table{
+    width: 500px;
+}
+
+.KniznicePage-container .KniznicePage-button-vytvor-kniznicu{
+    width: 500px;
+    margin-top: 10px;
+}
+
+
