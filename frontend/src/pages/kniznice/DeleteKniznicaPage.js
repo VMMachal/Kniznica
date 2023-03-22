@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 
 
-function DeleteKniznicaPage({routeParams, changeRoute}) {
+function DeleteKniznicaPage({appContext}) {
 
    
     return (

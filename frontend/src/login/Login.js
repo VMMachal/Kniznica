@@ -1,15 +1,20 @@
 import "./Login.css";
-import ErrorMessage from "../ErrorMessage";
 import {sendGetRequest} from "../utils/fetch";
 import { useEffect, useState } from 'react';
 import {sendPostRequest} from "../utils/fetch";
+import ErrorMessage from "../ErrorMessage";
 
-async function login(userName, password, setUser) {
+async function login(userName, password, setUser, appContext) {
     let user = await sendPostRequest("/api/login", {userName: userName, password: password})
     setUser(user);
+    if (user === null) {
+      appContext.displayErrorMessage("Prihlasenie zlyhalo");
+    } else {
+      appContext.closeErrorMessage();
+    }
 }
 
-function Login({setUser}) {
+function Login({setUser, appContext}) {
 
   let [ formUserName, setFormUserName ] = useState(null);
   let [ formPassword, setFormPassword ] = useState(null);
@@ -28,13 +33,12 @@ function Login({setUser}) {
     e.preventDefault();
     console.log(formUserName);
     console.log(formPassword);
-    login(formUserName, formPassword, setUser);
+    login(formUserName, formPassword, setUser, appContext);
   }
 
   return (
         
     <div className="Login-container-for-login">
-            <ErrorMessage></ErrorMessage>
             <form id="login-Form" className="Login-login-Form">
                 <div className="Login-header-container">
                     <h1>Prihlasenie</h1>

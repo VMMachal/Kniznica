@@ -36,7 +36,7 @@ function KniznicaLine(kniznica, changeRoute) {
     )
 }
 
-function KniznicePage({routeParams, changeRoute}) {
+function KniznicePage({appContext}) {
 
     let [ kniznice, setKniznice ] = useState([]);
 
@@ -44,9 +44,9 @@ function KniznicePage({routeParams, changeRoute}) {
         readKniznice(setKniznice);
     }, []);
 
-function handleClickButtonVytvorKniznice() {
-    changeRoute("kniznice/VytvorKniznicaPage", null)
-}
+    function handleClickButtonVytvorKniznice() {
+        appContext.changeRoute("kniznice/VytvorKniznicaPage", null)
+    }
 
   return (
     
@@ -63,7 +63,7 @@ function handleClickButtonVytvorKniznice() {
                 <tbody>
                     {
                         kniznice.map(function (k) {
-                            return KniznicaLine(k, changeRoute)
+                            return KniznicaLine(k, appContext.changeRoute)
                         })
                     }
                 </tbody>

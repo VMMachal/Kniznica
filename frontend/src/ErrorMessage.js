@@ -1,28 +1,20 @@
 import "./ErrorMessage.css";
 import { useState } from 'react';
 
-function ErrorMessage() {
-
-  const [isOpen, setIsOpenFn] = useState(true);
-
-  function hidePageErrorMessageBox() {
-    console.log("clicked here");
-    setIsOpenFn(false);
+function ErrorMessage({appContext}) {
+  function handleOnClick(e) {
+    e.preventDefault();
+    appContext.closeErrorMessage();
   }
 
-  if (isOpen === true) {
+  if (appContext.isErrorMessageOpen === true) {
+    
     return (
       <div id="page-error-message-box" className="ErrorMessage-error-container">
                     <div id="page-error-message-box-message">
-                        This is error message!
-                        This is error message!
-                        This is error message!
-                        This is error message!
-                        This is error message!
-                        This is error message!
-                        This is error message!
+                        {appContext.errorMessageText}
                     </div>
-                    <div className="ErrorMessage-exit-button" onClick = {hidePageErrorMessageBox}>
+                    <div className="ErrorMessage-exit-button" onClick = {handleOnClick}>
                         <span className="material-symbols-outlined">
                         close
                         </span>

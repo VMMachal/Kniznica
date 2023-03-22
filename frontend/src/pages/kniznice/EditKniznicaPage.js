@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 
 
-function EditKniznicaPage({routeParams, changeRoute}) {
+function EditKniznicaPage({appContext}) {
 
    
     return (

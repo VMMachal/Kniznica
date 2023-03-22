@@ -4,36 +4,37 @@ import VytvorKniznicaPage from "./kniznice/VytvorKniznicaPage";
 import EditKniznicaPage from "./kniznice/EditKniznicaPage";
 import DeleteKniznicaPage from "./kniznice/DeleteKniznicaPage";
 import KniznicaPage from "./kniznica/KniznicaPage";
+import { useAppContext } from '../appContext';
 
 
 
 
-function Router({routeName, routeParams, changeRoute}) {
+function Router({appContext}) {
 
-    if (routeName === "kniznice/KniznicePage") {
+    if (appContext.routeName === "kniznice/KniznicePage") {
         return (
-            <KniznicePage routeParams={routeParams} changeRoute={changeRoute}></KniznicePage>
+            <KniznicePage appContext={appContext}></KniznicePage>
         )
     
     } 
-    else if (routeName === "kniznice/VytvorKniznicaPage") {
+    else if (appContext.routeName === "kniznice/VytvorKniznicaPage") {
         return (
-            <VytvorKniznicaPage routeParams={routeParams} changeRoute={changeRoute}></VytvorKniznicaPage>
+            <VytvorKniznicaPage appContext={appContext}></VytvorKniznicaPage>
         )
     } 
-    else if (routeName === "kniznice/EditKniznicaPage") {
+    else if (appContext.routeName === "kniznice/EditKniznicaPage") {
         return (
-            <EditKniznicaPage routeParams={routeParams} changeRoute={changeRoute}></EditKniznicaPage>
+            <EditKniznicaPage appContext={appContext}></EditKniznicaPage>
         )
     }
-    else if (routeName === "kniznice/DeleteKniznicaPage") {
+    else if (appContext.routeName === "kniznice/DeleteKniznicaPage") {
         return (
-            <DeleteKniznicaPage routeParams={routeParams} changeRoute={changeRoute}></DeleteKniznicaPage>
+            <DeleteKniznicaPage appContext={appContext}></DeleteKniznicaPage>
         )
     }
-    else if (routeName === "kniznica/KniznicaPage") {
+    else if (appContext.routeName === "kniznica/KniznicaPage") {
         return (
-            <KniznicaPage routeParams={routeParams} changeRoute={changeRoute}></KniznicaPage>
+            <KniznicaPage appContext={appContext}></KniznicaPage>
         )
     } else {
         return <div>Unknown route</div>

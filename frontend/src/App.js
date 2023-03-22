@@ -5,6 +5,8 @@ import Login from "./login/Login"
 import Header from "./header/Header"
 import Footer from "./footer/Footer"
 import Router from "./pages/Router";
+import { useAppContext } from "./appContext";
+import ErrorMessage from "./ErrorMessage";
 
 
 async function readUser(setUser) {
@@ -17,29 +19,29 @@ async function readUser(setUser) {
 
 function App() {
 
+  let appContext = useAppContext();
   let [ user, setUser ] = useState(null);
-  let [ currentRoute, setCurrentRoute ] = useState({routeName: "kniznice/KniznicePage", routeParams: null});
 
   useEffect(() => {
     readUser(setUser);
   }, []);
 
-  function changeRoute(routeName, routeParams) {
-    setCurrentRoute({routeName: routeName, routeParams: routeParams})
-  }
-
   if (user){
     return (
         <div className="App-container">
         <Header user={user} setUser={setUser}></Header>
-        <Router routeName={currentRoute.routeName} routeParams={currentRoute.routeParams} changeRoute={changeRoute}></Router>
+        <ErrorMessage appContext={appContext}></ErrorMessage>
+        <Router appContext={appContext}></Router>
         <Footer></Footer>
         </div>
     )
   } else {
     return (
-        <Login setUser={setUser}></Login>
-    
+      <div className="App-container">
+        <ErrorMessage appContext={appContext}></ErrorMessage>
+        <Login setUser={setUser} appContext={appContext}></Login>
+        
+    </div>
   );
   }
 
