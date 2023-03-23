@@ -1,6 +1,7 @@
 const { kniznicaCreate } = require('../../src/business/kniznica')
 const { kniznicaGet } = require('../../src/business/kniznica')
 const { kniznicaUpdate } = require('../../src/business/kniznica')
+const { kniznicaDelete } = require('../../src/business/kniznica')
 const { kniznicaGetAll } = require('../../src/business/kniznica')
 const { kniznicaAddStudent } = require('../../src/business/kniznica')
 const { kniznicaRemoveStudent } = require('../../src/business/kniznica')
@@ -28,6 +29,17 @@ describe('kniznica', function () {
         let result = await kniznicaUpdate(kniznica.id, kniznica.meno, 'blablabla')
         if (result.meno !== kniznica.meno) {
             throw new Error ('assertion failed');
+        }
+    })
+    it('call kniznicaDelete', async function () {
+        let id = await kniznicaCreate('kniznica f', 'Fta kniznica')
+        if (!id) {
+            throw new Error('Assertion failed')
+        }
+        await kniznicaDelete(id);
+        let kniznica = await kniznicaGet(id);
+        if (kniznica !== null) {
+            throw new Error('Assertion failed')
         }
     })
     it('call kniznicaGetAll', async function () {

@@ -35,6 +35,21 @@ async function kniznicaUpdate(id, meno, popis) {
     }
 }
 
+async function kniznicaDelete(id) {
+    let conn
+    try {
+        conn = await getConnection()
+        let result = await conn.query(
+            'delete from kniznica where id = ?',
+            [id]
+        )
+        return {}
+
+    } finally {
+        closeConnection(conn)
+    }
+}
+
 async function kniznicaGet(id) {
     let conn
     try {
@@ -168,6 +183,7 @@ async function kniznicaGetAllKnihy(kniznicaId) {
 exports.kniznicaCreate = kniznicaCreate
 exports.kniznicaGet = kniznicaGet
 exports.kniznicaUpdate = kniznicaUpdate
+exports.kniznicaDelete = kniznicaDelete
 exports.kniznicaGetAll = kniznicaGetAll
 exports.kniznicaAddStudent = kniznicaAddStudent
 exports.kniznicaRemoveStudent = kniznicaRemoveStudent

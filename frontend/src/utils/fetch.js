@@ -48,3 +48,26 @@ export async function sendPostRequest(url, body) {
     }
 }
 
+export async function sendDeleteRequest(url, body) {
+    try {
+        let response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+        });
+        if (response.ok) {
+            let data = await response.json();
+            console.log('Success:', data)
+            return data
+        } else {
+            console.error(`Error, response status: ${response.status}`);
+            return null;
+        }
+    } catch (err) {
+        console.error('Error:', err)
+        return null;
+    }
+}
+

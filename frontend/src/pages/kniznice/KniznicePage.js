@@ -10,17 +10,32 @@ async function readKniznice(setKniznice) {
     setKniznice(kniznice);
 }
 
+
+  
+  /*let fn = makehandleClickUprav(5);
+  fn();*/
+
 function KniznicaLine(kniznica, changeRoute) {
     function handleClickOtvor(){
         changeRoute("kniznica/KniznicaPage", null)
     }
-    function handleClickUprav(){
-        changeRoute("kniznice/EditKniznicaPage", null)
-    }
-    function handleClickVymaz(){
-        changeRoute("kniznice/DeleteKniznicaPage", null)
+    
+
+    function makeHandleClickUprav (kniznicaId) {
+        function handleClickUprav(){
+          changeRoute("kniznice/EditKniznicaPage", {kniznicaId: kniznicaId})
+        }
+  
+        return handleClickUprav;
     }
 
+    function makeHandleClickVymaz (kniznicaId) {
+        function handleClickVymaz(){
+          changeRoute("kniznice/DeleteKniznicaPage", {kniznicaId: kniznicaId})
+        }
+  
+        return handleClickVymaz;
+    }
     return (
         <tr>
             <td>{kniznica.meno}</td>
@@ -28,8 +43,8 @@ function KniznicaLine(kniznica, changeRoute) {
             <td>
                 <div className="action-link-container">
                     <a href="#" onClick={handleClickOtvor}>otvor</a>
-                    <a href="#" onClick={handleClickUprav}>uprav</a>
-                    <a href="#" onClick={handleClickVymaz}>vymaz</a>
+                    <a href="#" onClick={makeHandleClickUprav(kniznica.id)}>uprav</a>
+                    <a href="#" onClick={makeHandleClickVymaz(kniznica.id)}>vymaz</a>
                 </div>
             </td>
         </tr>
@@ -68,7 +83,7 @@ function KniznicePage({appContext}) {
                     }
                 </tbody>
         </table>
-        <button className="KniznicePage-button-vytvor-kniznicu" onClick={handleClickButtonVytvorKniznice}>vytvor kniznicu</button>
+        <button className="button-submit" style={{width: "125px"}}onClick={handleClickButtonVytvorKniznice}>vytvor kniznicu</button>
     </div>
   );
 }

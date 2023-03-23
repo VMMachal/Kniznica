@@ -11,6 +11,7 @@ async function login(userName, password, setUser, appContext) {
       appContext.displayErrorMessage("Prihlasenie zlyhalo");
     } else {
       appContext.closeErrorMessage();
+      appContext.changeRoute("kniznice/KniznicePage", null);
     }
 }
 

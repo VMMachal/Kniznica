@@ -31,7 +31,11 @@ function App() {
         <div className="App-container">
         <Header user={user} setUser={setUser}></Header>
         <ErrorMessage appContext={appContext}></ErrorMessage>
-        <Router appContext={appContext}></Router>
+          <div className="App-router-container">
+            <div className="App-router">
+              <Router appContext={appContext}></Router>
+            </div> 
+          </div>
         <Footer></Footer>
         </div>
     )

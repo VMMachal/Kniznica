@@ -6,6 +6,7 @@ const { kniznicaGetAll } = require('../business/kniznica')
 const { kniznicaGetAllStudents } = require('../business/kniznica')
 const { kniznicaGetAllKnihy } = require('../business/kniznica')
 const { kniznicaUpdate } = require('../business/kniznica')
+const { kniznicaDelete } = require('../business/kniznica')
 const { kniznicaAddStudent } = require('../business/kniznica')
 const { kniznicaRemoveStudent } = require('../business/kniznica')
 const { kniznicaAddKniha } = require('../business/kniznica')
@@ -38,7 +39,7 @@ router.get('/kniznicaGet', async function (req, res) {
         let id = req.query.id
         if (!id) {
             res.status(400)
-            result.json({});
+            res.json({});
             res.end()
             return
         }
@@ -291,6 +292,28 @@ router.post('/kniznicaUpdate', async function (req, res) {
         let meno = req.body.meno
         let popis = req.body.popis
         let result = await kniznicaUpdate(id, meno, popis)
+        res.status(200)
+        res.json(result);
+        res.end()
+    } catch (err) {
+        console.error(`${FILE}:${FUNC}: error`, err)
+        res.status(500)
+        res.end()
+    }
+})
+
+router.delete('/kniznicaDelete', async function (req, res) {
+    const FUNC = 'post(/kniznicaDelete)'
+    try {
+        console.dir(req.body)
+        let id = req.body.id
+        if (!id) {
+            res.status(400)
+            res.json({});
+            res.end()
+            return
+        }
+        let result = await kniznicaDelete(id)
         res.status(200)
         res.json(result);
         res.end()

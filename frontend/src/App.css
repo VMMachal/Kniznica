@@ -5,3 +5,13 @@
   margin-left: 20px;
   margin-right: 20px;
 }
+
+.App-container .App-router-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.App-container .App-router-container .App-router{
+  width: 400px;
+}

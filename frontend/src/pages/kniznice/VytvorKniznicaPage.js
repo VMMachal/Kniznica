@@ -2,8 +2,8 @@ import "./VytvorKniznicaPage.css";
 import { useEffect, useState } from 'react';
 import { sendPostRequest } from "../../utils/fetch";
 
-async function vytvorKniznica(appContext, name, popis) {
-    let result = await sendPostRequest("/api/kniznicaCreate", {name: name, popis: popis})
+async function vytvorKniznica(appContext, meno, popis) {
+    let result = await sendPostRequest("/api/kniznicaCreate", {meno: meno, popis: popis})
     if (result === null) {
       appContext.displayErrorMessage("Nastala chyba");
     } else {
@@ -30,10 +30,14 @@ function VytvorKniznicaPage({appContext}) {
     }
 
     function handleClickVytvor(e) {
+        e.preventDefault();
+        appContext.closeErrorMessage();
         vytvorKniznica(appContext, formMeno, formPopis);
     }
 
     function handleClickSpat(e) {
+        e.preventDefault();
+        appContext.closeErrorMessage();
         appContext.changeRoute("kniznice/KniznicePage", null)
     }
    
@@ -41,7 +45,7 @@ function VytvorKniznicaPage({appContext}) {
         <div>
             <form>
                 <div>
-                    <h1>Kniznica</h1>
+                    <h1>Kniznica - vytvor</h1>
                 </div>
                 <div>
                   <div>
@@ -54,12 +58,12 @@ function VytvorKniznicaPage({appContext}) {
                     </div>
                 </div>
                 <div style= {{marginTop: "20px"}}>
-                    <button onClick={handleClickVytvor} style={{marginRight: "10px"}}>
+                    <button onClick={handleClickVytvor} className="button-submit">
                         vytvor
                     </button>
-                    <button onClick={handleClickSpat}>
+                    <a href="#" onClick={handleClickSpat}>
                         spat
-                    </button>
+                    </a>
                 </div>
                 
             </form>
