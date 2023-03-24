@@ -4,7 +4,8 @@ import VytvorKniznicaPage from "./kniznice/VytvorKniznicaPage";
 import EditKniznicaPage from "./kniznice/EditKniznicaPage";
 import DeleteKniznicaPage from "./kniznice/DeleteKniznicaPage";
 import KniznicaPage from "./kniznica/KniznicaPage";
-import { useAppContext } from '../appContext';
+import KnihyPage from './knihy/KnihyPage';
+import StudentiPage from './student/StudentiPage';
 
 
 
@@ -30,6 +31,16 @@ function Router({appContext}) {
     else if (appContext.routeName === "kniznice/DeleteKniznicaPage") {
         return (
             <DeleteKniznicaPage appContext={appContext}></DeleteKniznicaPage>
+        )
+    }
+    else if (appContext.routeName === "student/StudentiPage") {
+        return (
+            <StudentiPage appContext={appContext}></StudentiPage>
+        )
+    }
+    else if (appContext.routeName === "knihy/KnihyPage") {
+        return (
+            <KnihyPage appContext={appContext}></KnihyPage>
         )
     }
     else if (appContext.routeName === "kniznica/KniznicaPage") {

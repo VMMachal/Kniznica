@@ -16,10 +16,15 @@ async function readKniznice(setKniznice) {
   fn();*/
 
 function KniznicaLine(kniznica, changeRoute) {
-    function handleClickOtvor(){
-        changeRoute("kniznica/KniznicaPage", null)
+
+
+    function makeHandleClickOtvor (kniznicaId){
+        function handleClickOtvor(){
+            changeRoute("kniznica/KniznicaPage", {kniznicaId: kniznicaId})
+        }
+
+        return handleClickOtvor;
     }
-    
 
     function makeHandleClickUprav (kniznicaId) {
         function handleClickUprav(){
@@ -42,7 +47,7 @@ function KniznicaLine(kniznica, changeRoute) {
             <td>{kniznica.popis}</td>
             <td>
                 <div className="action-link-container">
-                    <a href="#" onClick={handleClickOtvor}>otvor</a>
+                    <a href="#" onClick={makeHandleClickOtvor(kniznica.id)}>otvor</a>
                     <a href="#" onClick={makeHandleClickUprav(kniznica.id)}>uprav</a>
                     <a href="#" onClick={makeHandleClickVymaz(kniznica.id)}>vymaz</a>
                 </div>
